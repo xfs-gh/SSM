@@ -63,4 +63,8 @@ public class MVCTest {
             System.out.println(e);
         }
     }
+    @Test
+    public void testGit(){
+        System.out.println("hello git");
+    }
 }
