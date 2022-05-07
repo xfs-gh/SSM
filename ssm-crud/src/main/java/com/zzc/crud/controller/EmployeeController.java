@@ -156,7 +156,7 @@ public class EmployeeController {
     @RequestMapping("/emps")
     @ResponseBody
     public Msg getEmpsWithJson(
-            @RequestParam(value = "pn",defaultValue = "1") Integer pn){
+            @RequestParam(value = "pn",defaultValue = "1") Integer pn,HttpServletRequest request){
         //这不是分页查询
         //引入PageHelper分页插件
         //在查询功能之前使用PageHelper.startPage(int pageNum, int pageSize)开启分页功能
@@ -164,7 +164,9 @@ public class EmployeeController {
         List<Employee> emps = employeeService.getAll();
         //使用pageInfo查询后的结果，只需要将pageInfo交给页面，封装了详细的分页信息，包括查看出来的数据
         PageInfo page = new PageInfo(emps,5);
+        request.setAttribute("pageInfo",page);
         return Msg.success().add("pageInfo",page);
+        //return "list";
     }
     /**
      * 查询员工数据  分页查询
